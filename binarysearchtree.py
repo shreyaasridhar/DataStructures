@@ -22,6 +22,7 @@ class BinarySearchTree:
         self.sz = 0
         self.root = None
         self.ht = 0
+        self.sum=0
 
     """
         This method implements the functionality of finding an element in the tree. The function
@@ -123,6 +124,23 @@ class BinarySearchTree:
         print curnode.element,
 
     """
+        Accepting 2 values l and h from the user and find the
+        sum of all values between l and h present in the tree
+   """
+    def SumofValues(self,v,l,h):
+        curnode = v
+        while 1:
+            if curnode.element>l and curnode.element<h:
+                self.sum+=curnode.element
+            if curnode.leftchild != None:
+                curnode = curnode.leftchild
+            elif curnode.rightchild != None:
+                curnode = curnode.rightchild
+            else:
+                return self.sum        
+        return self.sum    
+
+    """
         Given a node v this will return the next element that should be visited after v in the
         inorder traversal.
     """
@@ -178,7 +196,7 @@ class BinarySearchTree:
                     elif (replacenode.rightchild != None):
                         replacenode.parent.leftchild = replacenode.rightchild
                         replacenode.rightchild.parent = replacenode.parent
-                elif (replacenode.parent.righttchild == replacenode):
+                elif (replacenode.parent.rightchild == replacenode):
                     if (replacenode.leftchild != None):
                         replacenode.parent.rightchild = replacenode.leftchild
                         replacenode.leftchild.parent = replacenode.parent
@@ -196,7 +214,6 @@ class BinarySearchTree:
                 else:
                     curnode.parent.rightchild = curnode.rightchild
                 curnode = curnode.rightchild
-                
                 return
             elif (curnode.rightchild == None):
                 ht1 = math.floor(math.log(curnode.pos,2))
